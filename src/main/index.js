@@ -5,6 +5,8 @@ import path from "path";
 
 function createWindow() {
   const mainWindow = new BrowserWindow({
+    minWidth: 375,
+    minHeight: 400,
     width: 900,
     height: 670,
     show: false,

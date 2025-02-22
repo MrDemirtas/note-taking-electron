@@ -1,9 +1,17 @@
-function App() {
+import { useEffect, useState } from "react";
 
-  return (
-    <>
-    </>
-  )
+import { getPage } from "./helper";
+
+function App() {
+  const [route, setRoute] = useState("/login");
+
+  useEffect(() => {
+    window.addEventListener("hashchange", () => {
+      setRoute(window.location.hash.substring(1));
+    });
+  }, []);
+
+  return <>{getPage(route)}</>;
 }
 
-export default App
+export default App;

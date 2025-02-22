@@ -1,4 +1,4 @@
-import './assets/main.css'
+import './assets/reset.css'
 
 import App from './App'
 import React from 'react'
