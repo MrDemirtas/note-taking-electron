@@ -1,35 +1,41 @@
-import "../assets/Login.css";
+import "../../assets/styles/Login/Login.css";
 
-import googleSvg from "../assets/img/google.svg";
-import hideSvg from "../assets/img/hide-eye.svg";
-import noteLogo from "../assets/img/logo.svg";
-import showSvg from "../assets/img/show-eye.svg";
+import googleSvg from "../../assets/img/google.svg";
+import hideSvg from "../../assets/img/hide-eye.svg";
+import infoCircle from "../../assets/img/info-circle.svg";
+import noteLogo from "../../assets/img/logo.svg";
+import showSvg from "../../assets/img/show-eye.svg";
 import { useState } from "react";
 
-export default function Login() {
+export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+  };
 
   return (
     <div className="login-container">
       <div className="login-contents">
         <div className="login-header">
           <img src={noteLogo} alt="logo" />
-          <h1>Notes </h1>
+          <h1>Notes</h1>
         </div>
         <div className="login-titles">
-          <h2>Welcome to Note</h2>
-          <p>Please log in to continue</p>
+          <h2>Create Your Account</h2>
+          <p>
+            Sign up to start organizing your notes and boost your productivity.
+          </p>
         </div>
-        <form className="login-form">
+        <form className="login-form" onSubmit={handleSubmit}>
           <label>
             Email Address
             <input type="email" name="email" placeholder="email@example.com" />
           </label>
           <label>
-            <div className="password-texts">
-              Password
-              <a href="#forgot-password">Forgot</a>
-            </div>
+            <div className="password-texts">Password</div>
             <div className="password-input-content">
               <input
                 type={showPassword ? "text" : "password"}
@@ -45,9 +51,13 @@ export default function Login() {
                 />
               </button>
             </div>
+            <p className="signup-password-info">
+              <img src={infoCircle} alt="info" />
+              At least 8 characters
+            </p>
           </label>
           <button className="login-submit-btn" type="submit">
-            Login
+            Sign up
           </button>
           <div className="login-other-with">
             <p>Or log in with:</p>
@@ -58,7 +68,7 @@ export default function Login() {
           </div>
           <div className="login-signup">
             <p>
-              No account yet? <a href="#signup">Sign Up</a>
+              Already have an account? <a href="#/login">Login</a>
             </p>
           </div>
         </form>
