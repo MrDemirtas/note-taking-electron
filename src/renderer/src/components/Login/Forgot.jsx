@@ -1,9 +1,15 @@
+import { Supabase } from "../../App";
 import noteLogo from "../../assets/img/logo.svg";
+import { useContext } from "react";
 
 export default function Forgot() {
-  const handleSubmit = (e) => {
+  const supabase = useContext(Supabase);
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const email = e.target.email.value;
+    console.log(await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/#/reset-password`,
+    }));
   };
 
   return (

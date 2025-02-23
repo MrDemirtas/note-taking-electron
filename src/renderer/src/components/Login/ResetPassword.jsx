@@ -3,27 +3,39 @@ import "../../assets/styles/Login/Login.css";
 import { useContext, useEffect, useState } from "react";
 
 import { Supabase } from "../../App";
-import googleSvg from "../../assets/img/google.svg";
 import hideSvg from "../../assets/img/hide-eye.svg";
-import infoCircle from "../../assets/img/info-circle.svg";
 import noteLogo from "../../assets/img/logo.svg";
 import showSvg from "../../assets/img/show-eye.svg";
 
-export default function SignUp() {
+export default function ResetPassword() {
   const supabase = useContext(Supabase);
   const [showPassword, setShowPassword] = useState(false);
 
+  const params = new URLSearchParams(window.location.hash.substring(1));
+  const accessToken = params.get("/reset-password#access_token");
+  const refreshToken = params.get("refresh_token");
+  supabase.auth.setSession({
+    access_token: accessToken,
+    refresh_token: refreshToken,
+  }).then(console.log);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const email = e.target.email.value;
     const password = e.target.password.value;
-    const { user, error } = await supabase.auth.signUp({ email, password });
-    if (error) {
-      console.log(error.message);
-    } else {
-      console.log(user);
-      console.log("User created successfully");
+    const confirmPassword = e.target.confirmPassword.value;
+    if (
+      password !== confirmPassword ||
+      password.length < 8 ||
+      password.length > 100
+    ) {
+      console.log("Password does not match or is invalid");
+      return;
     }
+    console.log(
+      await supabase.auth.updateUser({
+        password,
+      })
+    );
   };
 
   return (
@@ -34,16 +46,10 @@ export default function SignUp() {
           <h1>Notes</h1>
         </div>
         <div className="login-titles">
-          <h2>Create Your Account</h2>
-          <p>
-            Sign up to start organizing your notes and boost your productivity.
-          </p>
+          <h2>Reset Password</h2>
+          <p></p>
         </div>
         <form className="login-form" onSubmit={handleSubmit}>
-          <label>
-            Email Address
-            <input type="email" name="email" placeholder="email@example.com" />
-          </label>
           <label>
             <div className="password-texts">Password</div>
             <div className="password-input-content">
@@ -61,26 +67,28 @@ export default function SignUp() {
                 />
               </button>
             </div>
-            <p className="signup-password-info">
-              <img src={infoCircle} alt="info" />
-              At least 8 characters
-            </p>
+          </label>
+          <label>
+            <div className="password-texts">Confirm Password</div>
+            <div className="password-input-content">
+              <input
+                type={showPassword ? "text" : "password"}
+                name="confirmPassword"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                <img
+                  src={showPassword ? hideSvg : showSvg}
+                  alt="Show Password"
+                />
+              </button>
+            </div>
           </label>
           <button className="login-submit-btn" type="submit">
-            Sign up
+            Reset Password
           </button>
-          <div className="login-other-with">
-            <p>Or log in with:</p>
-            <button type="button">
-              <img src={googleSvg} alt="Login with Google" />
-              Google
-            </button>
-          </div>
-          <div className="login-signup">
-            <p>
-              Already have an account? <a href="#/login">Login</a>
-            </p>
-          </div>
         </form>
       </div>
     </div>

@@ -1,13 +1,15 @@
 import "../../assets/styles/Login/Login.css";
 
+import { useContext, useEffect, useState } from "react";
+
+import { Supabase } from "../../App";
 import googleSvg from "../../assets/img/google.svg";
 import hideSvg from "../../assets/img/hide-eye.svg";
 import noteLogo from "../../assets/img/logo.svg";
 import showSvg from "../../assets/img/show-eye.svg";
-import { supabase } from "../../../../../supabaseClient";
-import { useState } from "react";
 
 export default function Login() {
+  const supabase = useContext(Supabase);
   const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e) => {

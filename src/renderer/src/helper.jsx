@@ -2,6 +2,7 @@ import Forgot from "./components/Login/Forgot";
 import Login from "./components/Login/Login";
 import NotFound from "./components/NoteFound";
 import Notes from "./components/Main/Notes";
+import ResetPassword from "./components/Login/ResetPassword";
 import SignUp from "./components/Login/SignUp";
 
 const routers = [
@@ -25,11 +26,16 @@ const routers = [
     component: <Notes />,
     title: "Notes",
   },
+  {
+    url: "/reset-password",
+    component: <ResetPassword />,
+    title: "Reset Password",
+  },
 ];
 
 export const getPage = (url) => {
   return (
-    routers.find((router) => router.url === url) || {
+    routers.find((router) => url.startsWith(router.url)) || {
       component: <NotFound />,
       title: "404 Not Found",
     }
