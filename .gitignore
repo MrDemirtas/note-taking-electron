@@ -1,7 +1,96 @@
-node_modules
-dist
-out
-.DS_Store
 .eslintcache
 *.log*
+
+# Node.js bağımlılıkları
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+bun.lockb
+
+# Çıktı dosyaları
+dist/
+build/
+.out/
+.temp/
+.cache/
+
+# Çevresel değişkenler
 .env
+.env.local
+.env.*.local
+
+# Log dosyaları
+logs/
+*.log
+logs/*.log
+logs/*.lock
+logs/*.gz
+
+# IDE ve editör dosyaları
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+*.iml
+
+# OS bağımsız dosyalar
+.DS_Store
+Thumbs.db
+
+# Test ve coverage dosyaları
+coverage/
+.nyc_output/
+jest-cache/
+jest-output/
+
+# PM2 process manager
+pm2.log
+pm2.pid
+dump.pm2
+
+# Docker ve container dosyaları
+docker-compose.override.yml
+.dockerignore
+
+# TypeScript build dosyaları
+*.tsbuildinfo
+
+# Prisma (Eğer kullanıyorsan)
+prisma/migrations/
+prisma/.env
+
+# Next.js (Eğer kullanıyorsan)
+.next/
+out/
+
+# Remix (Eğer kullanıyorsan)
+.build/
+
+# SvelteKit (Eğer kullanıyorsan)
+.svelte-kit/
+
+# Firebase (Eğer kullanıyorsan)
+.firebase/
+firestore-debug.log
+.firebaserc
+
+# AWS ve diğer cloud servisleri
+.aws-sam/
+.serverless/
+
+# Turbo ve Nx Monorepo cache
+turbo/
+nx-cache/
+
+# Bun için
+.bun/
+
+# Çeşitli
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
